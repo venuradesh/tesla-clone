@@ -1,0 +1,60 @@
+const HomeSectionData = [
+  {
+    title: "Model S",
+    desc: "Order Online for",
+    span: "Touchless Delivery",
+    button1: "Customer order",
+    button2: "Existing Inventory",
+    img: "/images/model-s.jpg",
+  },
+  {
+    title: "Model 3",
+    desc: "Order Online for",
+    span: "Touchless Delivery",
+    button1: "Customer order",
+    button2: "Existing Inventory",
+    img: "/images/model-3.jpg",
+  },
+  {
+    title: "Model X",
+    desc: "Order Online for",
+    span: "Touchless Delivery",
+    button1: "Customer order",
+    button2: "Existing Inventory",
+    img: "/images/model-x.jpg",
+  },
+  {
+    title: "Model Y",
+    desc: "Order Online for",
+    span: "Touchless Delivery",
+    button1: "Customer order",
+    button2: "Existing Inventory",
+    img: "/images/model-y.jpg",
+  },
+  {
+    title: "Solar Panels",
+    desc: "Lowest Cost Solar Panels in America",
+    span: "",
+    button1: "Customer order",
+    button2: "Existing Inventory",
+    img: "/images/solar-panel.jpg",
+  },
+  {
+    title: "Solar Roofs",
+    desc: "Produce Clean Energy From Your Roof",
+    span: "",
+    button1: "Customer order",
+    button2: "Existing Inventory",
+    img: "/images/solar-roof.jpg",
+  },
+  {
+    title: "Accessories",
+    desc: "",
+    span: "",
+    button1: "Shop Now",
+    button2: "",
+    img: "/images/accessories.jpg",
+  },
+];
+
+export default HomeSectionData;

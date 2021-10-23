@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -11,9 +12,14 @@
   --screen-size-d: "375px";
   --screen-size-e: "320px";
 
-  --light-gray: #f2f3f5;
+  --font-color: #393c41;
+  --font-color-subHeading: #64656a;
 
-  --font-size-heading: 2.3rem;
+  --light-gray: #f2f3f5;
+  --scrollbar-color: #d9d9d9;
+
+  --font-size-heading: 2.5rem;
+  --font-size-heading-res: 2rem;
   --font-size-subHeading: 1.5rem;
   --font-size-normal: 1rem;
   --font-size-upper: 0.9rem;
@@ -21,11 +27,21 @@
   --font-size-x-small: 0.7rem;
 }
 
+a {
+  text-decoration: none;
+  color: var(--font-color);
+}
+
+li {
+  list-style: none;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
