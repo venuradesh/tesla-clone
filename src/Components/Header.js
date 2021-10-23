@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import "remixicon/fonts/remixicon.css";
 
 const Header = () => {
+  // const [mediaQueryEnabled, setMediaQueryEnabled] = useState(false);
+  const onMenuClick = () => {
+    document.querySelector(".menu-container").classList.add("active");
+  };
+
+  const onCloseClick = () => {
+    document.querySelector(".menu-container").classList.remove("active");
+  };
+
   return (
     <Container>
       <div className="header-menu left">
@@ -18,10 +28,139 @@ const Header = () => {
       <div className="header-menu right">
         <div className="shop">shop</div>
         <div className="account">account</div>
-        <div className="menu">menu</div>
+        <div
+          className="menu"
+          onClick={() => {
+            onMenuClick();
+          }}
+        >
+          menu
+        </div>
       </div>
       <div className="menu-container">
-        <div className="overlay"></div>
+        <div
+          className="overlay"
+          onClick={() => {
+            onCloseClick();
+          }}
+        ></div>
+        <div className="menu-items ">
+          <div className="close-btn">
+            <i
+              class="ri-close-fill"
+              onClick={() => {
+                onCloseClick();
+              }}
+            ></i>
+          </div>
+          <div className="menu-item-container">
+            <li>
+              <a href="#" className="menu-item">
+                model S
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                model 3
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                model x
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                model y
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                solar roof
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                solar panels
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Existing Inventory
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Used Intentory
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Trade In
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Test Drive
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Cybertruck
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Roadster
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Roadster
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Semi
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Charging
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                PowerWall
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Commercial energy
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Utilities
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Find us
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Support
+              </a>
+            </li>
+            <li>
+              <a href="#" className="menu-item">
+                Inventory Relations
+              </a>
+            </li>
+          </div>
+        </div>
       </div>
     </Container>
   );
@@ -55,6 +194,7 @@ const Container = styled.div`
       display: flex;
       width: max-content;
       column-gap: 20px;
+      color: var(--font-color);
 
       div {
         font-size: var(--font-size-upper);
@@ -67,7 +207,112 @@ const Container = styled.div`
         transition: all 0.3s ease;
 
         &:hover {
-          background-color: var(--light-gray);
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+
+  .menu-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+
+    &.active {
+      display: flex;
+      flex-direction: column;
+      visibility: visible;
+
+      .overlay {
+        width: 100vw;
+        height: 100vh;
+        backdrop-filter: blur(3px);
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+
+      .menu-items {
+        position: absolute;
+        right: 0;
+        transform: translateX(0);
+        width: 270px;
+        height: 100vh;
+        animation: slideIn 0.3s;
+        background-color: white;
+
+        @keyframes slideIn {
+          0% {
+            transform: translateX(100%);
+          }
+          100% {
+            transform: translateX(0%);
+          }
+        }
+
+        .close-btn {
+          height: 80px;
+          background-color: white;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          padding-right: 30px;
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--font-color);
+          cursor: pointer;
+
+          i {
+            padding: 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease-out;
+
+            &:hover {
+              background-color: var(--light-gray);
+            }
+          }
+        }
+
+        .menu-item-container {
+          height: calc(100vh - 100px);
+          width: 100%;
+          overflow-y: auto;
+          z-index: 110;
+          padding-bottom: 100px;
+
+          &::-webkit-scrollbar {
+            width: 5px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-color);
+            border-radius: 8px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background-color: transparent;
+          }
+
+          li {
+            height: 45px;
+            padding-left: 30px;
+            padding-right: 30px;
+
+            a {
+              font-size: var(--font-size-normal);
+              font-weight: 600;
+              height: 45px;
+              display: flex;
+              align-items: center;
+              padding-left: 20px;
+              text-transform: capitalize;
+              border-radius: 12px;
+              transition: all 0.3s ease-out;
+
+              &:hover {
+                background-color: var(--light-gray);
+              }
+            }
+          }
         }
       }
     }
