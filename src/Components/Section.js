@@ -41,6 +41,7 @@ export default Section;
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  scroll-snap-align: start;
 `;
 
 const Wrapper = styled.div`

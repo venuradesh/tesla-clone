@@ -17,4 +17,17 @@ export default Home;
 
 const Container = styled.div`
   position: relative;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100vh;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background-color: var(--font-color);
+  }
 `;
