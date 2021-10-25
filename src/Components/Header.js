@@ -1,21 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import "remixicon/fonts/remixicon.css";
+import gsap from "gsap";
 
 const Header = () => {
-  // const [mediaQueryEnabled, setMediaQueryEnabled] = useState(false);
+  const header = useRef();
+  const selector = useSelector((state) => state.resMenu.headerMenu);
+  const [mediaQueryEnabled, setMediaQueryEnabled] = useState(false);
+  //check whether the media query is enabled or not
+  const mq = window.matchMedia("(max-width: 1220px)");
+
+  useEffect(() => {
+    setMediaQueryEnabled(mq.matches);
+    gsap.fromTo(header.current, { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 1 });
+  }, [mq.matches]);
+  //open the side bar menu
   const onMenuClick = () => {
     document.querySelector(".menu-container").classList.add("active");
   };
-
+  //close the nav side bar menu
   const onCloseClick = () => {
     document.querySelector(".menu-container").classList.remove("active");
   };
 
   return (
-    <Container>
+    <Container ref={header}>
       <div className="header-menu left">
-        <img className="logo" src="/images/logo.svg" />
+        <img className="logo" src="/images/logo.svg" alt="" />
       </div>
       <div className="header-menu middle">
         <div className="s">model s</div>
@@ -47,14 +59,23 @@ const Header = () => {
         <div className="menu-items ">
           <div className="close-btn">
             <i
-              class="ri-close-fill"
+              className="ri-close-fill"
               onClick={() => {
                 onCloseClick();
               }}
             ></i>
           </div>
           <div className="menu-item-container">
-            <li>
+            {mediaQueryEnabled
+              ? selector.map((menu, index) => (
+                  <li>
+                    <a href="#" className="menu-item" key={index}>
+                      {menu}
+                    </a>
+                  </li>
+                ))
+              : ""}
+            {/* <li>
               <a href="#" className="menu-item">
                 model S
               </a>
@@ -83,7 +104,7 @@ const Header = () => {
               <a href="#" className="menu-item">
                 solar panels
               </a>
-            </li>
+            </li> */}
             <li>
               <a href="#" className="menu-item">
                 Existing Inventory

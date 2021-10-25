@@ -1,31 +1,71 @@
-import React from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import styled from "styled-components";
 import "remixicon/fonts/remixicon.css";
+import gsap from "gsap";
 
 const Section = (props) => {
+  const title = useRef(null);
+  const desc = useRef(null);
+  const wrapper = useRef(null);
+  const rightBtn = useRef(null);
+  const leftBtn = useRef(null);
+  const arrow = useRef(null);
+  const options = useMemo(() => {
+    return {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.2,
+    };
+  }, []);
+
+  useEffect(() => {
+    const targetEle = wrapper.current;
+    console.log(leftBtn);
+    const observer = new IntersectionObserver((entries) => {
+      entries.map((entry) => {
+        if (entry.isIntersecting) {
+          gsap.from(title.current, { duration: 1, y: 20, opacity: 0, delay: 0.5 });
+          gsap.from(desc.current, { duration: 1, delay: 1, opacity: 0, y: 20 });
+          gsap.fromTo(rightBtn.current, { opacity: 0, x: 50, visibility: "hidden" }, { opacity: 1, x: 0, visibility: "visible", delay: 1.5 });
+          gsap.fromTo(leftBtn.current, { opacity: 0, x: -50, visibility: "hidden" }, { opacity: 1, x: 0, visibility: "visible", delay: 1.5 });
+          if (arrow.current) gsap.fromTo(arrow.current, { visibility: "hidden", opacity: 0 }, { visibility: "visible", opacity: 1, duration: 1, delay: 2 });
+        }
+      });
+    }, options);
+    if (targetEle) observer.observe(targetEle);
+  }, []);
+
   return (
-    <Container>
-      <Wrapper src={props.img}>
+    <Container id={props.id}>
+      <Wrapper src={props.img} ref={wrapper}>
         <TitleContainer>
-          <div className="title">{props.title}</div>
-          <div className="desc">
+          <div className="title" ref={title}>
+            {props.title}
+          </div>
+          <div className="desc" ref={desc}>
             {props.desc} <span>{props.span}</span>
           </div>
         </TitleContainer>
         <BtnContainer>
           {!props.button2 ? (
             <div className="btns alone">
-              <div className="left btn">{props.button1}</div>
+              <div className="left btn" ref={leftBtn}>
+                {props.button1}
+              </div>
             </div>
           ) : (
             <div className="btns">
-              <div className="left btn">{props.button1}</div>
-              <div className="right btn">{props.button2}</div>
+              <div className="left btn" ref={leftBtn}>
+                {props.button1}
+              </div>
+              <div className="right btn" ref={rightBtn}>
+                {props.button2}
+              </div>
             </div>
           )}
           {props.index === 0 ? (
             <div className="go-down-arrow">
-              <i class="ri-arrow-down-s-line"></i>
+              <i className="ri-arrow-down-s-line" ref={arrow}></i>
             </div>
           ) : (
             ""
@@ -91,17 +131,15 @@ const BtnContainer = styled.div`
       cursor: pointer;
       transition: all 0.3s ease-in-out;
 
-      &:hover {
-        transform: scale(1.02) translateY(-5px);
-      }
-
       &.left {
         background-color: #333439;
         color: white;
+        visibility: hidden;
       }
 
       &.right {
         background-color: #e0dddc;
+        visibility: hidden;
       }
     }
   }
@@ -144,11 +182,12 @@ const BtnContainer = styled.div`
     width: 300px;
 
     .btns {
+      height: 80px;
       flex-direction: column;
       row-gap: 10px;
 
       .btn {
-        padding: 8px 0px;
+        padding: 10px 0px;
         font-size: var(--font-size-x-small);
       }
     }
