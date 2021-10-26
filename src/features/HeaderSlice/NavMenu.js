@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   headerMenu: ["model s", "model 3", "model x", "model y", "solar roof", "solar panels"],
+  shopMenu: ["shop", "account"],
 };
 
 const NavMenu = createSlice({

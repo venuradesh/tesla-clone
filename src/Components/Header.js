@@ -7,6 +7,7 @@ import gsap from "gsap";
 const Header = () => {
   const header = useRef();
   const selector = useSelector((state) => state.resMenu.headerMenu);
+  const selector2 = useSelector((state) => state.resMenu.shopMenu);
   const [mediaQueryEnabled, setMediaQueryEnabled] = useState(false);
   //check whether the media query is enabled or not
   const mq = window.matchMedia("(max-width: 1220px)");
@@ -75,36 +76,6 @@ const Header = () => {
                   </li>
                 ))
               : ""}
-            {/* <li>
-              <a href="#" className="menu-item">
-                model S
-              </a>
-            </li>
-            <li>
-              <a href="#" className="menu-item">
-                model 3
-              </a>
-            </li>
-            <li>
-              <a href="#" className="menu-item">
-                model x
-              </a>
-            </li>
-            <li>
-              <a href="#" className="menu-item">
-                model y
-              </a>
-            </li>
-            <li>
-              <a href="#" className="menu-item">
-                solar roof
-              </a>
-            </li>
-            <li>
-              <a href="#" className="menu-item">
-                solar panels
-              </a>
-            </li> */}
             <li>
               <a href="#" className="menu-item">
                 Existing Inventory
@@ -180,6 +151,15 @@ const Header = () => {
                 Inventory Relations
               </a>
             </li>
+            {mediaQueryEnabled
+              ? selector2.map((menu, index) => (
+                  <li>
+                    <a href="#" className="menu-item" key={index}>
+                      {menu}
+                    </a>
+                  </li>
+                ))
+              : ""}
           </div>
         </div>
       </div>
